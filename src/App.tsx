@@ -7,7 +7,7 @@ function App() {
 		<>
 			<div className={"h-screen flex flex-col"}>
 				<Header />
-				<div className="flex flex-1 gap-10">
+				<div className="flex flex-1 ">
 					<SideBar />
 					<Month />
 				</div>

@@ -9,7 +9,7 @@ const Header = () => {
 	const setCurrentMonth = useDateInfoStore((state) => state.setCurrentMonth);
 	const monthIndex = useDateInfoStore((state) => state.monthIndex);
 	return (
-		<header className="px-4 py-2 flex items-center ">
+		<header className="p-4 flex items-center ">
 			<img
 				src={calendar}
 				alt="calendar icon"
