@@ -1,4 +1,6 @@
+import clsx from "clsx";
 import { Dayjs } from "dayjs";
+import { isToday } from "../util/date-helper";
 
 const Day = ({ day, rowIdx }: { day: Dayjs; rowIdx: number }) => {
 	return (
@@ -9,7 +11,13 @@ const Day = ({ day, rowIdx }: { day: Dayjs; rowIdx: number }) => {
 						{day.format("ddd").toUpperCase()}
 					</p>
 				)}
-				<p className="p-1 my-1 text-sm text-center ">{day.format("DD")}</p>
+				<p
+					className={clsx(
+						"p-1 my-1 text-sm text-center",
+						isToday(day) && "w-7 bg-blue-600 text-white rounded-full",
+					)}>
+					{day.format("DD")}
+				</p>
 			</header>
 		</div>
 	);

@@ -1,10 +1,11 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
-import { getMonth } from "../util/date-helper";
-import { Dayjs } from "dayjs";
+import { getDaysInMonth } from "../util/date-helper";
+import dayjs, { Dayjs } from "dayjs";
 
 type State = {
 	currentMonth: Dayjs[][];
+	monthIndex: number;
 };
 
 type Action = {
@@ -15,10 +16,12 @@ type DateInfoStore = State & Action;
 
 export const useDateInfoStore = create<DateInfoStore>()(
 	immer((set) => ({
-		currentMonth: getMonth(),
+		currentMonth: getDaysInMonth(),
+		monthIndex: dayjs().month(),
 		setCurrentMonth: (payload) =>
 			set((state) => {
-				state.currentMonth = getMonth(payload);
+				state.currentMonth = getDaysInMonth(payload);
+				state.monthIndex = payload;
 			}),
 	})),
 );
