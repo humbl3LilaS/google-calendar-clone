@@ -1,5 +1,19 @@
+import Header from "./components/Header";
+import Month from "./components/Month";
+import SideBar from "./components/SideBar";
+
 function App() {
-	return <h1 className="text-3xl text-red-400">hello</h1>;
+	return (
+		<>
+			<div className={"h-screen flex flex-col"}>
+				<Header />
+				<div className="flex flex-1 gap-10">
+					<SideBar />
+					<Month />
+				</div>
+			</div>
+		</>
+	);
 }
 
 export default App;
