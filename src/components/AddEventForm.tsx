@@ -3,7 +3,7 @@ import { Input } from "./ui/input";
 import { Clock, AlignRight, Bookmark } from "lucide-react";
 import { Label } from "./ui/label";
 
-]import BookmarkSelectorContainer from "./BookmarkSelectorContainer";
+import BookmarkSelectorContainer from "./BookmarkSelectorContainer";
 
 const AddEventForm = () => {
 	const selectedDate = useDateInfoStore((state) => state.selectedDate);
