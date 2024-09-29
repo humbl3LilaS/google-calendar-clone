@@ -1,15 +1,16 @@
-import { useState } from "react";
 import { Calendar } from "@/components/ui/calendar";
 import { useDateInfoStore } from "@/store/dateInfoStore";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import dayjs from "dayjs";
 
 const SmallCalendar = () => {
-	const [date, setDate] = useState<Date | undefined>(new Date());
+	const selectedDate = useDateInfoStore((state) => state.selectedDate);
+	const setSelectedDate = useDateInfoStore((state) => state.setSelectedDate);
 	const setCurrentMonth = useDateInfoStore((state) => state.setCurrentMonth);
 	const monthIndex = useDateInfoStore((state) => state.monthIndex);
 
 	const handler = (payload: Date | undefined) => {
-		setDate(payload);
+		setSelectedDate(dayjs(payload));
 		if (payload) {
 			setCurrentMonth(payload.getMonth());
 		}
@@ -19,7 +20,7 @@ const SmallCalendar = () => {
 		<div>
 			<Calendar
 				mode="single"
-				selected={date}
+				selected={selectedDate.toDate()}
 				onSelect={handler}
 				components={{
 					IconLeft: ({ ...props }) => (
