@@ -1,13 +1,12 @@
-import { useDateInfoStore } from "@/store/dateInfoStore";
-import { Input } from "./ui/input";
-import { Clock, AlignRight, Bookmark } from "lucide-react";
-import { Label } from "./ui/label";
-
-import { Button } from "./ui/button";
-import { useForm } from "react-hook-form";
-import { useEventStore } from "@/store/eventStore";
-import BookmarkSelector from "./BookmarkSelector";
+import { CalendarEvent, useEventStore } from "@/store/eventStore";
 import { DialogClose } from "./ui/dialog";
+import { Button } from "./ui/button";
+import { Bookmark, AlignRight, Clock } from "lucide-react";
+import BookmarkSelector from "./BookmarkSelector";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
+import { useDateInfoStore } from "@/store/dateInfoStore";
+import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 
 type FormInputs = {
@@ -15,26 +14,33 @@ type FormInputs = {
 	description?: string;
 };
 
-const AddEventForm = () => {
+const UpdateEventForm = ({ defaultValue }: { defaultValue: CalendarEvent }) => {
 	const selectedDate = useDateInfoStore((state) => state.selectedDate);
-	const addEvent = useEventStore((state) => state.addEvent);
+	const updateEvent = useEventStore((state) => state.updateEvent);
 	const selectedBookmark = useDateInfoStore((state) => state.selectedBookmark);
 	const setSelectedBookmark = useDateInfoStore(
 		(state) => state.setSelectedBookmark,
 	);
-	const { register, handleSubmit } = useForm<FormInputs>();
+	const { register, handleSubmit } = useForm<FormInputs>({
+		defaultValues: {
+			title: defaultValue.title,
+			description: defaultValue.description,
+		},
+	});
 	const onSubmit = handleSubmit((data) => {
-		addEvent({
-			id: Math.random().toString(),
+		updateEvent(defaultValue.id, {
 			title: data.title,
 			description: data.description,
-			date: selectedDate,
 			bookmarkTag: selectedBookmark,
 		});
 	});
 
 	useEffect(() => {
-		setSelectedBookmark("");
+		if (defaultValue.bookmarkTag) {
+			setSelectedBookmark(defaultValue.bookmarkTag);
+		} else {
+			setSelectedBookmark("");
+		}
 	}, []);
 
 	return (
@@ -73,4 +79,4 @@ const AddEventForm = () => {
 	);
 };
 
-export default AddEventForm;
+export default UpdateEventForm;

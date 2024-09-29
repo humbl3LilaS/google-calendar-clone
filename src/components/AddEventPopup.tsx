@@ -8,7 +8,7 @@ import {
 import AddEventForm from "./AddEventForm";
 import { ReactNode } from "react";
 
-const AddEventPopup = ({ children }: { children: ReactNode }) => {
+const AddEventPopup = ({ children }: { children?: ReactNode }) => {
 	return (
 		<Dialog>
 			<DialogTrigger asChild>{children}</DialogTrigger>

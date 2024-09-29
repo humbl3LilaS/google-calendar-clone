@@ -16,7 +16,10 @@ type State = {
 
 type Action = {
 	addEvent: (payload: CalendarEvent) => void;
-	updateEvent: (id: string, payload: Partial<CalendarEvent>) => void;
+	updateEvent: (
+		id: string,
+		payload: { title: string; description?: string; bookmarkTag?: string },
+	) => void;
 	deleteEvent: (id: string) => void;
 };
 
@@ -31,11 +34,9 @@ export const useEventStore = create<Store>()(
 			}),
 		updateEvent: (id, payload) =>
 			set((state) => {
-				state.events.map((item) => {
-					if (item.id == id) {
-						item = { ...item, ...payload };
-					}
-				});
+				state.events = state.events
+					.filter((item) => item.id === id)
+					.map((item) => ({ id: item.id, date: item.date, ...payload }));
 			}),
 		deleteEvent: (id) =>
 			set((state) => {
