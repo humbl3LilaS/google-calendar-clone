@@ -2,14 +2,11 @@ import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
 import { RadioGroupItem } from "./ui/radio-group";
 import { Label } from "./ui/label";
-import {
-	useActiveBookmark,
-	useSetActiveBookmark,
-} from "@/context/BookmarkSelectorContextProvider";
+import { useDateInfoStore } from "@/store/dateInfoStore";
 
 const BookmarkItem = ({ theme, value }: { theme: string; value: string }) => {
-	const activeTag = useActiveBookmark();
-	const setActiveTag = useSetActiveBookmark();
+	const selectedBookmark = useDateInfoStore((state) => state.selectedBookmark);
+
 	return (
 		<div>
 			<RadioGroupItem
@@ -22,9 +19,8 @@ const BookmarkItem = ({ theme, value }: { theme: string; value: string }) => {
 					`aspect-square w-8 rounded-full flex justify-center items-center`,
 					theme,
 				)}
-				htmlFor={value}
-				onClick={() => setActiveTag(value)}>
-				{activeTag === value && <Check className="text-white" />}
+				htmlFor={value}>
+				{selectedBookmark === value && <Check className="text-white" />}
 			</Label>
 		</div>
 	);

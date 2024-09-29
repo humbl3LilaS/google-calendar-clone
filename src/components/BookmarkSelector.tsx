@@ -1,12 +1,6 @@
-import { useState } from "react";
 import BookmarkItem from "./Bookmark";
 import { RadioGroup } from "./ui/radio-group";
-import {
-	useActiveBookmark,
-	useSetActiveBookmark,
-} from "@/context/BookmarkSelectorContextProvider";
-
-const BOOKMARK_THEMESS = ["indigo", "gray", "green", "blue", "red", "purple"];
+import { useDateInfoStore } from "@/store/dateInfoStore";
 const BOOKMARK_THEME = [
 	{ theme: "bg-indigo-500", value: "indigo" },
 	{ theme: "bg-gray-500", value: "gray" },
@@ -16,11 +10,11 @@ const BOOKMARK_THEME = [
 	{ theme: "bg-purple-500", value: "purple" },
 ];
 const BookmarkSelector = () => {
-	const setActiveTag = useSetActiveBookmark();
-	const activeTag = useActiveBookmark();
-	console.log(activeTag);
+	const setSelectedBookmark = useDateInfoStore(
+		(state) => state.setSelectedBookmark,
+	);
 	return (
-		<RadioGroup onValueChange={(value) => setActiveTag(value)}>
+		<RadioGroup onValueChange={(value) => setSelectedBookmark(value)}>
 			<div className="flex items-center gap-x-4">
 				{BOOKMARK_THEME.map((item) => (
 					<BookmarkItem
