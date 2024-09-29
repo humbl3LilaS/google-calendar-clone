@@ -7,6 +7,7 @@ import { Button } from "./ui/button";
 import { useForm } from "react-hook-form";
 import { useEventStore } from "@/store/eventStore";
 import BookmarkSelector from "./BookmarkSelector";
+import { DialogClose } from "./ui/dialog";
 
 type FormInputs = {
 	title: string;
@@ -53,11 +54,13 @@ const AddEventForm = () => {
 				<BookmarkSelector />
 			</p>
 
-			<Button
-				type="submit"
-				className="ml-auto mt-4 block bg-blue-500 text-white">
-				Save
-			</Button>
+			<DialogClose className="w-full">
+				<Button
+					type="submit"
+					className="ml-auto mt-4 block bg-blue-500 text-white">
+					Save
+				</Button>
+			</DialogClose>
 		</form>
 	);
 };
