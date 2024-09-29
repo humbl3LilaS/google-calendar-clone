@@ -7,11 +7,13 @@ type State = {
 	currentMonth: Dayjs[][];
 	monthIndex: number;
 	selectedDate: Dayjs;
+	selectedBookmark: string | undefined;
 };
 
 type Action = {
 	setCurrentMonth: (payload: number) => void;
 	setSelectedDate: (payload: Dayjs) => void;
+	setSelectedBookmark: (payload: string) => void;
 };
 
 type DateInfoStore = State & Action;
@@ -21,6 +23,7 @@ export const useDateInfoStore = create<DateInfoStore>()(
 		currentMonth: getDaysInMonth(),
 		monthIndex: dayjs().month(),
 		selectedDate: dayjs(),
+		selectedBookmark: undefined,
 		setCurrentMonth: (payload) =>
 			set((state) => {
 				state.currentMonth = getDaysInMonth(payload);
@@ -29,6 +32,10 @@ export const useDateInfoStore = create<DateInfoStore>()(
 		setSelectedDate: (payload) =>
 			set((state) => {
 				state.selectedDate = payload;
+			}),
+		setSelectedBookmark: (payload) =>
+			set((state) => {
+				state.selectedBookmark = payload;
 			}),
 	})),
 );
