@@ -8,6 +8,15 @@ import { getMonthYear } from "@/util/date-helper";
 const Header = () => {
 	const setCurrentMonth = useDateInfoStore((state) => state.setCurrentMonth);
 	const monthIndex = useDateInfoStore((state) => state.monthIndex);
+
+	const setToPreviousMonthHandler = () => {
+		setCurrentMonth(monthIndex - 1);
+	};
+
+	const setToNextMonthHandler = () => {
+		setCurrentMonth(monthIndex + 1);
+	};
+
 	return (
 		<header className="p-4 flex items-center ">
 			<img
@@ -26,7 +35,7 @@ const Header = () => {
 			<Button
 				variant={"outline"}
 				className="mr-2"
-				onClick={() => setCurrentMonth(monthIndex - 1)}>
+				onClick={setToPreviousMonthHandler}>
 				<img
 					src={arrowLeft}
 					alt="icon of cheveron left"
@@ -34,7 +43,7 @@ const Header = () => {
 			</Button>
 			<Button
 				variant={"outline"}
-				onClick={() => setCurrentMonth(monthIndex + 1)}
+				onClick={setToNextMonthHandler}
 				className="mr-8">
 				<img
 					src={arrowRight}
