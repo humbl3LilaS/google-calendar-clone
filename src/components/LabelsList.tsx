@@ -1,6 +1,5 @@
 import LabelItem from "./LabelItem";
 import { useActiveTagStore } from "@/store/activeTagStore";
-import { Button } from "./ui/button";
 import { useEventStore } from "@/store/eventStore";
 import { useEffect } from "react";
 
@@ -25,24 +24,15 @@ const LabelsList = () => {
 				const includeInActiveTagsNotInTags = activeTags
 					.map((item) => item.tagName)
 					.filter((item) => !tags.includes(item));
-				console.log(
-					"includeInActiveTagsNotInTags",
-					includeInActiveTagsNotInTags,
-				);
-				console.log(
-					"includeInTagsButNotInActiveTags",
-					includeInTagsButNotInActiveTags,
-				);
+
 				if (includeInTagsButNotInActiveTags.length > 1) {
 					includeInTagsButNotInActiveTags.forEach((item) => addActiveTag(item));
 				} else {
-					console.log("I'm here");
 					addActiveTag(includeInTagsButNotInActiveTags[0]);
 				}
 				if (includeInActiveTagsNotInTags.length > 1) {
 					includeInActiveTagsNotInTags.forEach((item) => removeActiveTag(item));
 				} else {
-					console.log("I'm here too");
 					removeActiveTag(includeInActiveTagsNotInTags[0]);
 				}
 			}

@@ -4,7 +4,6 @@ import Day from "./Day";
 
 const Month = () => {
 	const currentMonth = useDateInfoStore((state) => state.currentMonth);
-	console.log(currentMonth);
 	return (
 		<div className="bg-blue-200 flex-1 grid grid-cols-7 gird-rows-5">
 			{currentMonth.map((row, i) => {

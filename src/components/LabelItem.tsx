@@ -12,7 +12,6 @@ const LabelItem = ({ tagName }: { tagName: string | undefined }) => {
 	const [checked, setChecked] = useState(true);
 
 	const handler = () => {
-		console.log("handler invoke", !checked);
 		setChecked((prev) => !prev);
 		if (!checked) {
 			addActiveTags(tagName);
