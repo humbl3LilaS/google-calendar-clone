@@ -1,4 +1,5 @@
 import AddEventPopup from "./AddEventPopup";
+import LabelsList from "./LabelsList";
 import SmallCalendar from "./SmallCalendar";
 import { Button } from "./ui/button";
 import plus from "/icon/plus.svg";
@@ -19,6 +20,7 @@ const SideBar = () => {
 				</Button>
 			</AddEventPopup>
 			<SmallCalendar />
+			<LabelsList />
 		</div>
 	);
 };

@@ -17,6 +17,7 @@ type FormInputs = {
 const UpdateEventForm = ({ defaultValue }: { defaultValue: CalendarEvent }) => {
 	const selectedDate = useDateInfoStore((state) => state.selectedDate);
 	const updateEvent = useEventStore((state) => state.updateEvent);
+	const deleteEvent = useEventStore((state) => state.deleteEvent);
 	const selectedBookmark = useDateInfoStore((state) => state.selectedBookmark);
 	const setSelectedBookmark = useDateInfoStore(
 		(state) => state.setSelectedBookmark,
@@ -34,6 +35,10 @@ const UpdateEventForm = ({ defaultValue }: { defaultValue: CalendarEvent }) => {
 			bookmarkTag: selectedBookmark,
 		});
 	});
+
+	const deleteHandler = () => {
+		deleteEvent(defaultValue.id);
+	};
 
 	useEffect(() => {
 		if (defaultValue.bookmarkTag) {
@@ -68,13 +73,23 @@ const UpdateEventForm = ({ defaultValue }: { defaultValue: CalendarEvent }) => {
 				<BookmarkSelector />
 			</p>
 
-			<DialogClose className="w-full">
-				<Button
-					type="submit"
-					className="ml-auto mt-4 block bg-blue-500 text-white">
-					Save
-				</Button>
-			</DialogClose>
+			<div className="flex justify-end items-center gap-x-5">
+				<DialogClose>
+					<Button
+						type="submit"
+						className="ml-auto mt-4 block bg-red-500 text-white"
+						onClick={deleteHandler}>
+						Delete
+					</Button>
+				</DialogClose>
+				<DialogClose>
+					<Button
+						type="submit"
+						className="ml-auto mt-4 block bg-blue-500 text-white">
+						Save
+					</Button>
+				</DialogClose>
+			</div>
 		</form>
 	);
 };

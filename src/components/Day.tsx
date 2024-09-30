@@ -3,16 +3,17 @@ import { Dayjs } from "dayjs";
 import { isToday } from "../util/date-helper";
 import AddEventPopup from "./AddEventPopup";
 import { useDateInfoStore } from "@/store/dateInfoStore";
-import { useEventStore } from "@/store/eventStore";
 import Event from "./Event";
+import { useFilteredEvents } from "@/hook/useFilteredEvents";
+import { useEventStore } from "@/store/eventStore";
 
 const Day = ({ day, rowIdx }: { day: Dayjs; rowIdx: number }) => {
 	const setSelectedDate = useDateInfoStore((state) => state.setSelectedDate);
+	const filteredEvents = useFilteredEvents(day);
 	const events = useEventStore((state) => state.events);
-	const filteredEvents = events.filter((item) => item.date.isSame(day));
-
+	console.log(events);
 	return (
-		<div className="relative">
+		<div className="flex flex-col relative border border-gray-300 ">
 			<AddEventPopup>
 				<div
 					className="absolute w-full h-full top-0 left-0 cursor-pointer z-10"

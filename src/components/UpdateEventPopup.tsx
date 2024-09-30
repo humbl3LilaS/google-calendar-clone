@@ -20,7 +20,9 @@ const UpdateEventPopup = ({ data }: UpdateEventPopupProp) => {
 				<p
 					className={cn(
 						` py-1 px-4 relative z-20 bg-emerald-300 rounded-xl text-gray-100 truncate`,
-						data.bookmarkTag ? `bg-${data.bookmarkTag}-500` : "bg-emerald-300",
+						data.bookmarkTag
+							? `bg-${data.bookmarkTag}-500`
+							: "bg-emerald-300 text-gray-500",
 					)}>
 					{data.title}
 				</p>
