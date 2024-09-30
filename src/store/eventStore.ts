@@ -34,9 +34,13 @@ export const useEventStore = create<Store>()(
 			}),
 		updateEvent: (id, payload) =>
 			set((state) => {
-				state.events = state.events
-					.filter((item) => item.id === id)
-					.map((item) => ({ id: item.id, date: item.date, ...payload }));
+				state.events = state.events.map((item) => {
+					if (item.id === id) {
+						return { id: item.id, date: item.date, ...payload };
+					} else {
+						return item;
+					}
+				});
 			}),
 		deleteEvent: (id) =>
 			set((state) => {
