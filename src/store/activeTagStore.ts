@@ -11,8 +11,10 @@ type State = {
 };
 
 type Action = {
-	addActiveTags: (payload: string | undefined) => void;
-	removeActiveTags: (payload: string | undefined) => void;
+	activateActiveTag: (payload: string | undefined) => void;
+	deactivateActiveTag: (payload: string | undefined) => void;
+	addActiveTag: (payload: string | undefined) => void;
+	removeActiveTag: (payload: string | undefined) => void;
 };
 
 type Store = State & Action;
@@ -20,21 +22,29 @@ type Store = State & Action;
 export const useActiveTagStore = create<Store>()(
 	immer((set) => ({
 		activeTags: [],
-		addActiveTags: (payload) =>
+		addActiveTag: (payload) =>
 			set((state) => {
 				const tagsName = state.activeTags.map((item) => item.tagName);
 				if (!tagsName.includes(payload)) {
 					state.activeTags.push({ tagName: payload, isActive: true });
-				} else {
-					state.activeTags.map((item) => {
-						if (item.tagName === payload) {
-							item.isActive = true;
-						}
-						return item;
-					});
 				}
 			}),
-		removeActiveTags: (payload) =>
+		removeActiveTag: (payload) =>
+			set((state) => {
+				state.activeTags = state.activeTags.filter(
+					(item) => item.tagName !== payload,
+				);
+			}),
+		activateActiveTag: (payload) =>
+			set((state) => {
+				state.activeTags = state.activeTags.map((item) => {
+					if (item.tagName === payload) {
+						item.isActive = true;
+					}
+					return item;
+				});
+			}),
+		deactivateActiveTag: (payload) =>
 			set((state) => {
 				state.activeTags = state.activeTags.map((item) => {
 					if (item.tagName === payload) {

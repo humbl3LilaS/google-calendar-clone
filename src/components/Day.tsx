@@ -5,13 +5,11 @@ import AddEventPopup from "./AddEventPopup";
 import { useDateInfoStore } from "@/store/dateInfoStore";
 import Event from "./Event";
 import { useFilteredEvents } from "@/hook/useFilteredEvents";
-import { useEventStore } from "@/store/eventStore";
 
 const Day = ({ day, rowIdx }: { day: Dayjs; rowIdx: number }) => {
 	const setSelectedDate = useDateInfoStore((state) => state.setSelectedDate);
 	const filteredEvents = useFilteredEvents(day);
-	const events = useEventStore((state) => state.events);
-	console.log(events);
+
 	return (
 		<div className="flex flex-col relative border border-gray-300 ">
 			<AddEventPopup>

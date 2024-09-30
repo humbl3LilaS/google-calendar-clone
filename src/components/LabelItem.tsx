@@ -4,11 +4,10 @@ import { Label } from "./ui/label";
 import { useActiveTagStore } from "@/store/activeTagStore";
 
 const LabelItem = ({ tagName }: { tagName: string | undefined }) => {
-	const addActiveTags = useActiveTagStore((state) => state.addActiveTags);
-	const removeActiveTags = useActiveTagStore((state) => state.removeActiveTags);
-
-	const activeTags = useActiveTagStore((state) => state.activeTags);
-	console.log("activeTags", activeTags);
+	const addActiveTags = useActiveTagStore((state) => state.activateActiveTag);
+	const removeActiveTags = useActiveTagStore(
+		(state) => state.deactivateActiveTag,
+	);
 
 	const [checked, setChecked] = useState(true);
 
